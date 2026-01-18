@@ -103,12 +103,15 @@ require("lazy").setup(
         'L3MON4D3/LuaSnip',
         dependencies = {
             'rafamadriz/friendly-snippets'
-        }
+        },
     },
     {
         'saghen/blink.cmp',
         -- optional: provides snippets for the snippet source
-        dependencies = { 'rafamadriz/friendly-snippets' },
+        dependencies = {
+            { 'L3MON4D3/LuaSnip', version = 'v2.*'},
+            'rafamadriz/friendly-snippets',
+        },
 
         -- use a release tag to download pre-built binaries
         version = '1.*',
@@ -120,18 +123,6 @@ require("lazy").setup(
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
-          -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
-          -- 'super-tab' for mappings similar to vscode (tab to accept)
-          -- 'enter' for enter to accept
-          -- 'none' for no mappings
-          --
-          -- All presets have the following mappings:
-          -- C-space: Open menu or open docs if already open
-          -- C-n/C-p or Up/Down: Select next/previous item
-          -- C-e: Hide menu
-          -- C-k: Toggle signature help (if signature.enabled = true)
-          --
-          -- See :h blink-cmp-config-keymap for defining your own keymap
           keymap = {
               preset = 'enter',
           },
@@ -145,17 +136,13 @@ require("lazy").setup(
           -- (Default) Only show the documentation popup when manually triggered
           completion = {
             documentation = { auto_show = true},
-            --list = {
-            --    selection = {
-            --        preselect = false
-            --    }
-            --}
           },
 
           -- Default list of enabled providers defined so that you can extend it
           -- elsewhere in your config, without redefining it, due to `opts_extend`
+          snippets = { preset = 'luasnip' },
           sources = {
-            default = { 'lsp', 'path', 'snippets', 'buffer' },
+              default = { 'lsp', 'path', 'snippets', 'buffer' },
           },
 
 
@@ -228,7 +215,65 @@ require("lazy").setup(
         end
     },
 
+    --MISC TOOLS
+    {
+        'norcalli/nvim-colorizer.lua'
+    },
+    {
+        'Wansmer/treesj',
+        keys = { '<space>ms', '<space>j', '<space>s' },
+        dependencies = { 'nvim-treesitter/nvim-treesitter' }, -- if you install parsers with `nvim-treesitter`
+        config = function()
+          require('treesj').setup({--[[ your config ]]})
+        end,
+    },
+    {
+        'echasnovski/mini.surround',
+        opts = {
+            {
+              -- Add custom surroundings to be used on top of builtin ones. For more
+              -- information with examples, see `:h MiniSurround.config`.
+              custom_surroundings = nil,
+
+              -- Duration (in ms) of highlight when calling `MiniSurround.highlight()`
+              highlight_duration = 500,
+
+              -- Module mappings. Use `''` (empty string) to disable one.
+              mappings = {
+                add = 'sa', -- Add surrounding in Normal and Visual modes
+                delete = 'sd', -- Delete surrounding
+                find = 'sf', -- Find surrounding (to the right)
+                find_left = 'sF', -- Find surrounding (to the left)
+                highlight = 'sh', -- Highlight surrounding
+                replace = 'sr', -- Replace surrounding
+
+                suffix_last = 'l', -- Suffix to search with "prev" method
+                suffix_next = 'n', -- Suffix to search with "next" method
+              },
+
+              -- Number of lines within which surrounding is searched
+              n_lines = 20,
+
+              -- Whether to respect selection type:
+              -- - Place surroundings on separate lines in linewise mode.
+              -- - Place surroundings on each line in blockwise mode.
+              respect_selection_type = false,
+
+              -- How to search for surrounding (first inside current line, then inside
+              -- neighborhood). One of 'cover', 'cover_or_next', 'cover_or_prev',
+              -- 'cover_or_nearest', 'next', 'prev', 'nearest'. For more details,
+              -- see `:h MiniSurround.config`.
+              search_method = 'cover',
+
+              -- Whether to disable showing non-error feedback
+              -- This also affects (purely informational) helper messages shown after
+              -- idle time if user input is required.
+              silent = false,
+            }
+        }
+    }
   },
+
 
   -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { "habamax" } },
