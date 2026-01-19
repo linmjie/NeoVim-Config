@@ -26,3 +26,9 @@ vim.keymap.set({ 'i', 's' }, "<S-Tab>", function()
         return "<S-Tab>"
     end
 end, { expr = true, silent = true })
+
+vim.keymap.set({"i", "s"}, "<C-E>", function()
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
+end, {silent = true})

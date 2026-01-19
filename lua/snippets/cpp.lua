@@ -4,27 +4,34 @@ local t = ls.text_node
 local i = ls.insert_node
 local ex = require("luasnip.extras")
 local rep = ex.rep
+local fmt = require("luasnip.extras.fmt").fmt
+local fmta = require("luasnip.extras.fmt").fmta
 
-local function smartPointer(type)
-    return s(type, {
-        t('std::' .. type .. '_ptr<'), i(1, 'T'),
-        t('> '), i(2, 'name'),
-        t(' = std::make_' .. type .. '<'), rep(1), t('>();')
-    })
+local function smartPointer(pointerType)
+    return s(pointerType,
+        fmt([[std::{}_ptr<{}> {} = std::make_{}<{}>({});]], {
+            t(pointerType),
+            i(1, 'T'),
+            i(2, 'name'),
+            t(pointerType),
+            rep(1),
+            i(3)
+        })
+    )
 end
 
 return {
     smartPointer("unique"),
     smartPointer("shared"),
 
-    s("lambda", {
-        t('['), i(1, ''), t(']'),
-        t('('), i(2, ''), t(')'),
-        t('{ return '), i(3, ''), t('; }')
-    }),
-    s("anonymous_function", {
-        t('['), i(1, ''), t(']'),
-        t('('), i(2, ''), t(')'),
-        t('{'), i(3, ''), t('}')
-    })
+    s("lambda", fmta([[[<capture>](<param>){ return <body>; }]], {
+        capture = i(1),
+        param = i(2),
+        body = i(3)
+    })),
+    s("anonymous_function", fmta([[[<capture>](<param>){<body>}]], {
+        capture = i(1),
+        param = i(2),
+        body = i(3)
+    })),
 }
