@@ -40,32 +40,27 @@ vim.diagnostic.config({
 --local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 local capabilities = require('blink.cmp').get_lsp_capabilities() --get_lsp_capabilities(cmp_capabilities)
 
-vim.lsp.config(
-    'clangd',
-        {
-            filetypes = {'c', 'cpp'},
-            capabilities = capabilities,
-            ...  -- other lspconfig configs
-        },
-    'rust-analyzer',
-        {
-            capabilities = capabilities
-        },
-    'lua-ls',
-        {
-            capabilities = capabilities
-        },
-    'ts-ls',
-        {
-            capabilities = capabilities
-        },
-    'jdtls',
-        {
-            capabilities = capabilities
-        },
-    'pyright',
-        {
-            capabilities = capabilities
-        }
-)
+vim.lsp.config('clangd', {
+  filetypes = { 'c', 'cpp' },
+  capabilities = capabilities,
+})
 
+vim.lsp.config('rust_analyzer', {
+  capabilities = capabilities,
+})
+
+vim.lsp.config('lua_ls', {
+  capabilities = capabilities,
+})
+
+vim.lsp.config('tsserver', {
+  capabilities = capabilities,
+})
+
+vim.lsp.config('jdtls', {
+  capabilities = capabilities,
+})
+
+vim.lsp.config('pyright', {
+  capabilities = capabilities,
+})
