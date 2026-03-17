@@ -8,6 +8,9 @@ local d = ls.dynamic_node
 local rep = ex.rep
 
 return {
+    s("shuddup", {
+        t('#pyright: ignore')
+    }),
     s("main", {
         t({
             'def main():',
