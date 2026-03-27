@@ -15,6 +15,8 @@ ls.add_snippets('java', require("snippets.java"))
 ls.add_snippets('python', require("snippets.python"))
 ls.add_snippets('lua', require("snippets.neovim"))
 
+ls.add_snippets('all', require("snippets.all"))
+
 -- keymaps
 vim.keymap.set({ 'i', 's' }, "<Tab>", function()
     if ls.expand_or_jumpable() then
