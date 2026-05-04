@@ -18,6 +18,31 @@ return {
     s('ts', {
         t('this.')
     }),
+
+    s('todo', {
+        t('//TODO placeholder method definition'),
+        t('return null;')
+    }),
+
+    -- TODO: make it check lsp for Optional import
+    s('toptof',
+        fmt([[Optional<{}>]], {
+            i(1)
+        })
+    ),
+    s('optof',
+        fmt([[Optional.of({})]], {
+            i(1)
+        })
+    ),
+    -- idk if i wanna do nilopt or nullopt
+    s('nilopt', {
+        t'Optional.empty()'
+    }),
+    s('nullopt', {
+        t'Optional.empty()'
+    }),
+
     basicPrint('sout', 'println'),
     basicPrint('soun', 'print'),
     methodReference('soutref', 'println'),
