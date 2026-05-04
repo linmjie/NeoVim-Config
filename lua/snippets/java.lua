@@ -20,8 +20,10 @@ return {
     }),
 
     s('todo', {
-        t('//TODO placeholder method definition'),
-        t('return null;')
+        t({
+            '//TODO placeholder method definition',
+            'return null;'
+        }),
     }),
 
     -- TODO: make it check lsp for Optional import
