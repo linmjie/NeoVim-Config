@@ -45,6 +45,13 @@ return {
         t'Optional.empty()'
     }),
 
+    s('fstr',
+        fmt([[String.format("{}", {})]], {
+            i(1),
+            i(2),
+        })
+    ),
+
     basicPrint('sout', 'println'),
     basicPrint('soun', 'print'),
     methodReference('soutref', 'println'),
