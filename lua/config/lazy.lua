@@ -270,6 +270,9 @@ require("lazy").setup(
               -- idle time if user input is required.
               silent = false,
             }
+        },
+        {
+              'vyfor/cord.nvim'
         }
     }
   },
