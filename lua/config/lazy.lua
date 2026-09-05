@@ -273,6 +273,10 @@ require("lazy").setup(
         },
         {
               'vyfor/cord.nvim'
+        },
+        {
+            'kevinhwang91/nvim-hlslens',
+            config = function() require('hlslens').setup() end
         }
     }
   },
