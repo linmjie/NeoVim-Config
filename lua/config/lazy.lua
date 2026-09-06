@@ -287,7 +287,7 @@ require("lazy").setup(
             config = function()
               require("jupynvim").setup({
                 log_level = "info",
-                image_renderer = "kitty",  -- "placeholder", "kitty", or "chafa"
+                image_renderer = "placeholder",  -- "placeholder", "kitty", or "chafa"
               })
             end,
         }

@@ -43,3 +43,5 @@ vim.keymap.set("n", "<leader>din", ":DapStepInto<CR>")
 vim.keymap.set('n', "<leader>sb", "i#!/usr/bin/env bash<ESC>")
 
 vim.keymap.set('n', "<leader>el", ":Telescope ")
+
+vim.keymap.set('n', '<leader>jup', ':Jupynvim')
