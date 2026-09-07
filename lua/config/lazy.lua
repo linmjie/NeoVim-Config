@@ -303,7 +303,7 @@ require("lazy").setup({
 				end,
 			},
 			{
-				"sheng-tse/jupynvim",
+				"linmjie/jupynvim",
 				build = function(plugin)
 					local install = loadfile(plugin.dir .. "/lua/jupynvim/install.lua")()
 					install.run(plugin)
