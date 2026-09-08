@@ -41,8 +41,8 @@ vim.diagnostic.config({
 local capabilities = require('blink.cmp').get_lsp_capabilities() --get_lsp_capabilities(cmp_capabilities)
 
 vim.lsp.config('clangd', {
-  filetypes = { 'c', 'cpp' },
-  capabilities = capabilities,
+    capabilities = capabilities,
+    cmd = { 'clangd', '--header-insertion=iwyu' }
 })
 
 vim.lsp.config('rust_analyzer', {

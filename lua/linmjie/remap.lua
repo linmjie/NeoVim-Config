@@ -25,9 +25,25 @@ vim.keymap.set('v', "<leader>cc", '"+y')
 
 -- default lsp behavior is that errors pop on new lines, this toggles that
 vim.keymap.set('n', "<leader>nov", function()
-  local new_config = not vim.diagnostic.config().virtual_lines
-  vim.diagnostic.config({ virtual_lines = new_config })
+    local new_config = not vim.diagnostic.config().virtual_lines
+    vim.diagnostic.config({ virtual_lines = new_config })
 end, { desc = 'Toggle diagnostic virtual_lines' })
+
+
+vim.keymap.set('n', "<leader>noi", function()
+    local clangd_client = vim.lsp.get_clients({ name = 'clangd' })[1]
+    if not clangd_client then return end
+    local clangd_cmd = clangd_client.config.cmd
+    local header_insertion = clangd_cmd[2]
+    if header_insertion == '--header-insertion=iwyu' then
+        clangd_cmd[2] = '--header-insertion=never'
+    elseif header_insertion == '--header-insertion=never' then
+        clangd_cmd[2] = '--header-insertion=iwyu'
+    end
+    vim.cmd('lsp restart clangd')
+    -- hardcoding substring index cuz there's not built in split
+    print('Automatic header insertion: ' .. string.sub(clangd_cmd[2], 20))
+end)
 
 -- disabling highlighting
 vim.keymap.set('n', "<leader>noh", function() vim.cmd('noh') end)
